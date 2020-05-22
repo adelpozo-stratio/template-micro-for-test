@@ -1,0 +1,5 @@
+#!groovy
+library 'global-alm-pipeline-library'
+mavenPipeline (
+	integrationBranch: 'develop'
+)

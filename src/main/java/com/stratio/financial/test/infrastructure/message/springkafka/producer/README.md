@@ -1,0 +1,1 @@
+Place an '@Configuration' file to manage the logic when producing to Kafka.

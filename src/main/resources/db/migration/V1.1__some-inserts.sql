@@ -1,0 +1,5 @@
+--insert into category(id, name) values(1, 'dogs');
+--insert into category(id, name) values(2, 'cats');
+--insert into category(id, name) values(3, 'birds');
+--insert into pet(id, category_id, name, status) values(1, 1, 'Rufo', 'AVAILABLE');
+--insert into pet_photo_urls(pet_id, photos) values(1, 'rufo.png');

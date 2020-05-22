@@ -1,0 +1,1 @@
+Place Spring Data based interfaces of repositories here. These interfaces must be annotated with '@Repository' and must extend the corresponding interface defined in 'application/repository' folder and CrudRepository from Spring Data.

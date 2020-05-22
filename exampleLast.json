@@ -1,0 +1,10 @@
+{
+	"id": "999",
+	"key": "SomeKey",
+	"value": "This is the last value",
+	"last": true,
+	"detail": {
+		"index": "1",
+		"description": "test description"
+	}
+}

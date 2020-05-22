@@ -1,0 +1,1 @@
+Place here the event models you want to receive as a subscriber.

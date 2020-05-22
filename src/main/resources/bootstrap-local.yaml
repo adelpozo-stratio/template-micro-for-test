@@ -1,0 +1,21 @@
+management:
+  server:
+    port: 8091
+  endpoints:
+    web:
+      base-path: /
+  health:
+    redis:
+      enabled: false
+server:
+  port: 8080
+  servlet:
+    context-path: /@project.artifactId@
+project:
+  version: @project.version@
+spring:
+  application:
+    name: @project.artifactId@
+  cloud:
+    config:
+      enabled: false

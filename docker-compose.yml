@@ -1,0 +1,40 @@
+version: '2.3'
+services:
+  postgresql:
+    image: postgres:11
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+    ports:
+      - "5432:5432"
+  zookeeper:
+    image: wurstmeister/zookeeper
+    networks:
+      - internal
+    ports:
+      - 2181:2181
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - 9092:9092
+    depends_on:
+      - zookeeper
+    healthcheck:
+      test: "kafka-topics.sh --zookeeper zk:2181 --list 2>&1 | grep \"my.topic\""
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    links:
+      - zookeeper:zk
+    networks:
+      - internal
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_ZOOKEEPER_CONNECT: zk:2181
+      KAFKA_CREATE_TOPICS: "my.topic:1:1,task_1:1:1,task_5:1:1,task_4:1:1,task_6:1:1,task_11:1:1,task_10:1:1,task_30:1:1,workerCompany:5:1,workerCompanyUser:5:1,workerPayment:5:1,workerCompanyResource:5:1,workerCompanyOnBoarding:5:1"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+networks:
+  internal:

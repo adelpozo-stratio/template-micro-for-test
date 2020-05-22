@@ -1,0 +1,83 @@
+management:
+  server:
+    port: 8183
+
+spring:
+  main:
+    allow-bean-definition-overriding: "true"
+  server:
+    protocol: http
+    url: localhost:8083
+  data:
+    jpa.repositories.enabled: true
+    jpa:
+      properties:
+        hibernate:
+          temp.use_jdbc_metadata_defaults: false
+          ddl-auto: none
+          use-new-id-generator-mappings: false
+          default_schema: @project.artifactId@
+      show-sql: true
+      format_sql: true
+    flyway:
+      enabled: true
+      locations: classpath:/db/migration,classpath:/db/local
+      schemas: @project.artifactId@
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test
+    username: postgres
+    password: mysecretpassword
+    initialization-mode: always
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: consumer-group-id
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
+      value-deserializer: org.apache.kafka.common.serialization.StringSerializer
+  h2:
+    console:
+      enabled: true
+
+stratio:
+  circuitBreaker:
+    enabled: false
+    command:
+      type: com.stratio.financial.stratio.circuit.commands.factory.StratioCircuitBreakerCommand
+      errorTopic: error
+      strategy: THREAD
+      circuitBreakerEnabled: true
+      executionTimeout: 10000
+      sleepWindow: 1000
+      threadPoolMaxsize: 5
+      threadPoolCoresize: 10
+      taskQueueSize: 5
+      groupKey: gk
+      key: key
+  kafka:
+    starter:
+      transactional:
+        enabled: true
+        transactionalId: @project.artifactId@
+      schemaRegistry:
+        enabled: false
+        url: http://localhost:8081
+      consumer:
+        enabled: true
+        topics: test,sleep,throw,testFailure,throwdb
+        consumerGroupId: @project.artifactId@Group
+      #        concurrency: 1
+      #        maxPollRecords: 10
+      producer:
+        enabled: true
+        actionTopic:
+          error: pocError
+          partitions: 1
+          replicas: 1
+      rollBackConfig:
+        bussinessExceptions:
+          - com.stratio.financial.test.infrastructure.message.springkafka.ConsumerTestCustomException
+      cache:
+        enabled: false

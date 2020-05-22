@@ -1,0 +1,1 @@
+Interfaces for the APIs will be generated automatically once 'generate' goal of 'maven-swagger-codegen' plugin were executed in 'package' phase. This interfaces must be implemented in 'resource' folder.

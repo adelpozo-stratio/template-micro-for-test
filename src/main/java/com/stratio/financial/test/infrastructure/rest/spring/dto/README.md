@@ -1,0 +1,1 @@
+DTOs will be created here automatically once 'generate' goal of 'maven-swagger-codegen' plugin were executed in 'package' phase. All generated DTOs will be suffixed with 'Dto'.

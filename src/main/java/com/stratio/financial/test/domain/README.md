@@ -1,0 +1,1 @@
+Place here domain classes: What are we talking about? No references to frameworks such as Spring or Jackson. Just POJOs (JPA references are allowed, due to JavaEE nature).

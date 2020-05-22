@@ -1,0 +1,1 @@
+Place here services with business logic. One per each domain model object. No references to spring framwework classes or annotations!. Just logic
