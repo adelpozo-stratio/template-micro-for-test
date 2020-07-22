@@ -25,21 +25,32 @@ spring:
       schemas: @project.artifactId@
   datasource:
     url: jdbc:postgresql://localhost:5432/test
+    driverClassName: org.postgresql.Driver
     username: postgres
     password: mysecretpassword
     initialization-mode: always
   kafka:
-    bootstrap-servers: localhost:9092
-    consumer:
-      group-id: consumer-group-id
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    bootstrap-servers: adelpozo.servicebus.windows.net:9093
+    client-id: first-producer
+    properties:
+      request.timeout.ms: 60000
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://adelpozo.servicebus.windows.net/;SharedAccessKeyName=SendAndProduceAccessKey;SharedAccessKey=daXRnk3wt90wYKqNiFiKS5UkPOWXYMGJqbWSmcbS5yM=";
+      sasl.mechanism: PLAIN
+      security.protocol: SASL_SSL
     producer:
-      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
-      value-deserializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: com.stratio.financial.test.infrastructure.eventhub.ProducerMessageSerializer
+    consumer:
+      group-id: $Default
+      properties:
+        spring.json:
+          use.type.headers: false
+          value.default.type: com.stratio.financial.test.infrastructure.eventhub.SimpleMessage
   h2:
     console:
       enabled: true
+
+topic:
+  name: eventhubtopic
 
 stratio:
   kafka:
@@ -47,30 +58,7 @@ stratio:
       transactional:
         enabled: false
         transactionIdPrefix: @project.artifactId@
-      schemaRegistry:
-        enabled: false
-        url: http://localhost:8081
       consumer:
-        enabled: true
-        topics: normalTopic,priorityTopic,test,sleep,throw,testFailure,throwdb
-        consumerGroupId: @project.artifactId@Group
-        concurrency: 2
-        maxPollRecords: 30
-      conductorWorker:
-        enabled: true
-        topicsPattern: "worker.*"
-        consumerGroupId: @project.artifactId@Group
-        concurrency: 2
-        maxPollRecords: 30
+        enabled: false
       producer:
-        enabled: true
-        partitions: 1
-        replicas: 1
-        action-topic:
-          someAction: topic-to-produce-to
-          error: errorTest
-      rollBackConfig:
-        bussinessExceptions:
-          - com.stratio.financial.test.infrastructure.message.springkafka.ConsumerTestCustomException
-      cache:
         enabled: false
