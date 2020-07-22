@@ -2,7 +2,7 @@ package com.stratio.financial.test.infrastructure.message.springkafka.producer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stratio.financial.stratio.kafka.producer.StratioKafkaIsolatedEventProducer;
+import com.stratio.financial.stratio.kafka.producer.StratioKafkaEventProducer;
 import com.stratio.financial.test.application.producer.EventProducer;
 
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SpringKafkaEventProducer<K, T> implements EventProducer<K, T> {
 
-  private final StratioKafkaIsolatedEventProducer stratioKafkaEventProducer;
+  private final StratioKafkaEventProducer stratioKafkaEventProducer;
 
   private final ObjectMapper objectMapper;
 

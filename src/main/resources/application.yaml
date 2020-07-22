@@ -25,17 +25,26 @@ stratio:
     starter:
       transactional:
         enabled: true
-        transactionalId: @project.artifactId@
+        transactionIdPrefix: @project.artifactId@
       schemaRegistry:
         enabled: false
         url: http://localhost:8081
       consumer:
         enabled: true
-        topics: topic-to-consume-from
+        topics: normalTopic,priorityTopic
         consumerGroupId: @project.artifactId@Group
+        concurrency: 2
+        maxPollRecords: 30
+      conductorWorker:
+        enabled: true
+        topicsPattern: "worker.*"
+        consumerGroupId: @project.artifactId@Group
+        concurrency: 2
+        maxPollRecords: 30
       producer:
         enabled: true
         partitions: 1
         replicas: 1
         action-topic:
           someAction: topic-to-produce-to
+

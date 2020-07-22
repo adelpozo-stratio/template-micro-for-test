@@ -42,40 +42,33 @@ spring:
       enabled: true
 
 stratio:
-  circuitBreaker:
-    enabled: false
-    command:
-      type: com.stratio.financial.stratio.circuit.commands.factory.StratioCircuitBreakerCommand
-      errorTopic: error
-      strategy: THREAD
-      circuitBreakerEnabled: true
-      executionTimeout: 10000
-      sleepWindow: 1000
-      threadPoolMaxsize: 5
-      threadPoolCoresize: 10
-      taskQueueSize: 5
-      groupKey: gk
-      key: key
   kafka:
     starter:
       transactional:
-        enabled: true
-        transactionalId: @project.artifactId@
+        enabled: false
+        transactionIdPrefix: @project.artifactId@
       schemaRegistry:
         enabled: false
         url: http://localhost:8081
       consumer:
         enabled: true
-        topics: test,sleep,throw,testFailure,throwdb
+        topics: normalTopic,priorityTopic,test,sleep,throw,testFailure,throwdb
         consumerGroupId: @project.artifactId@Group
-      #        concurrency: 1
-      #        maxPollRecords: 10
+        concurrency: 2
+        maxPollRecords: 30
+      conductorWorker:
+        enabled: true
+        topicsPattern: "worker.*"
+        consumerGroupId: @project.artifactId@Group
+        concurrency: 2
+        maxPollRecords: 30
       producer:
         enabled: true
-        actionTopic:
-          error: pocError
-          partitions: 1
-          replicas: 1
+        partitions: 1
+        replicas: 1
+        action-topic:
+          someAction: topic-to-produce-to
+          error: errorTest
       rollBackConfig:
         bussinessExceptions:
           - com.stratio.financial.test.infrastructure.message.springkafka.ConsumerTestCustomException
