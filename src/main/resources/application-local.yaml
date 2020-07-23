@@ -30,7 +30,7 @@ spring:
     password: mysecretpassword
     initialization-mode: always
   kafka:
-    bootstrap-servers: adelpozo.servicebus.windows.net:9093
+    bootstrap-servers: adelpozo.servicebus.windows.net:9093,localhost:9092
     client-id: first-producer
     properties:
       request.timeout.ms: 60000
@@ -38,19 +38,22 @@ spring:
       sasl.mechanism: PLAIN
       security.protocol: SASL_SSL
     producer:
-      value-serializer: com.stratio.financial.test.infrastructure.eventhub.ProducerMessageSerializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     consumer:
       group-id: $Default
-      properties:
-        spring.json:
-          use.type.headers: false
-          value.default.type: com.stratio.financial.test.infrastructure.eventhub.SimpleMessage
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      properties:
+#        spring.json:
+#          use.type.headers: false
+#          value.default.type: com.stratio.financial.test.infrastructure.eventhub.SimpleMessage
   h2:
     console:
       enabled: true
 
-topic:
-  name: eventhubtopic
+#topic:
+#  name: eventhubtopic
 
 stratio:
   kafka:
@@ -59,6 +62,10 @@ stratio:
         enabled: false
         transactionIdPrefix: @project.artifactId@
       consumer:
-        enabled: false
+        enabled: true
+        topics: eventhubtopic
+        consumerGroupId: @project.artifactId@Group
       producer:
-        enabled: false
+        enabled: true
+        actionTopic:
+          noaction: evenhubproducer

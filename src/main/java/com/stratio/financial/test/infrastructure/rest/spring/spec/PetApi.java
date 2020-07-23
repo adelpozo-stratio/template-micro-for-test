@@ -67,7 +67,10 @@ public interface PetApi {
         } else {
             log.warn("ObjectMapper or HttpServletRequest not configured in default PetApi interface so no example is generated");
         }
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+
+
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
 
