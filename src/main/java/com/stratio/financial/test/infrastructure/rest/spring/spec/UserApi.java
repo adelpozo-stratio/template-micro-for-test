@@ -29,7 +29,7 @@ import javax.validation.constraints.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-21T22:05:06.428+02:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-07-24T11:21:54.659+02:00")
 
 @Api(value = "user", description = "the user API")
 @RequestMapping(value = "/v2")

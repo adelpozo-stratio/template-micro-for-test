@@ -30,7 +30,7 @@ import javax.validation.constraints.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-05-21T22:05:06.428+02:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-07-24T11:21:54.659+02:00")
 
 @Api(value = "pet", description = "the pet API")
 @RequestMapping(value = "/v2")
@@ -67,10 +67,7 @@ public interface PetApi {
         } else {
             log.warn("ObjectMapper or HttpServletRequest not configured in default PetApi interface so no example is generated");
         }
-
-
-
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 

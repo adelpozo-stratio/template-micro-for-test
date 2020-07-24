@@ -30,13 +30,14 @@ spring:
     password: mysecretpassword
     initialization-mode: always
   kafka:
-    bootstrap-servers: adelpozo.servicebus.windows.net:9093,localhost:9092
+    bootstrap-servers: adelpozo.servicebus.windows.net:9093
     client-id: first-producer
     properties:
       request.timeout.ms: 60000
-      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://adelpozo.servicebus.windows.net/;SharedAccessKeyName=SendAndProduceAccessKey;SharedAccessKey=daXRnk3wt90wYKqNiFiKS5UkPOWXYMGJqbWSmcbS5yM=";
-      sasl.mechanism: PLAIN
+      sasl.jaas.config: org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required;
+      sasl.mechanism: OAUTHBEARER
       security.protocol: SASL_SSL
+      sasl.login.callback.handler.class: com.stratio.financial.test.infrastructure.eventhub.CustomAuthenticateCallbackHandler
     producer:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
@@ -44,16 +45,14 @@ spring:
       group-id: $Default
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      properties:
-#        spring.json:
-#          use.type.headers: false
-#          value.default.type: com.stratio.financial.test.infrastructure.eventhub.SimpleMessage
   h2:
     console:
       enabled: true
 
-#topic:
-#  name: eventhubtopic
+eventhub:
+  authority: https://login.microsoftonline.com/alvaropozocuencagmail.onmicrosoft.com
+  appId: f5d984e6-cf8e-43b0-a7df-714179093227
+  appSecret: 3P2~AnG245-JE898Z~X3.-aKGr_w78O5Z6
 
 stratio:
   kafka:
@@ -63,9 +62,9 @@ stratio:
         transactionIdPrefix: @project.artifactId@
       consumer:
         enabled: true
-        topics: eventhubtopic
+        topics: eventhubaad
         consumerGroupId: @project.artifactId@Group
       producer:
         enabled: true
         actionTopic:
-          noaction: evenhubproducer
+          noaction: eventhubproduceaad

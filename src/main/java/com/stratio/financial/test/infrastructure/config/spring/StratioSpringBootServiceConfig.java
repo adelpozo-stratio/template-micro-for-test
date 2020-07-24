@@ -19,4 +19,6 @@ public class StratioSpringBootServiceConfig {
     return new PetService(petRepository);
   }
 
+
+
 }
