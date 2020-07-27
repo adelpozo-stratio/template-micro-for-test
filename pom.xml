@@ -46,7 +46,7 @@
     <asm.version>6.2</asm.version>
     <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
     <org.mockito.core.version>2.23.4</org.mockito.core.version>
-    <stratio-kafka-spring-boot-starter-version>1.0.12</stratio-kafka-spring-boot-starter-version>
+    <stratio-kafka-spring-boot-starter-version>1.0.13-SNAPSHOT</stratio-kafka-spring-boot-starter-version>
     <stratio-observability-spring-boot-starter.version>1.0.1
     </stratio-observability-spring-boot-starter.version>
     <embedded-database-spring-test-version>1.5.3</embedded-database-spring-test-version>

@@ -1,6 +1,5 @@
 package com.stratio.financial.test.infrastructure.message.springkafka.consumer.config;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +19,8 @@ public class SpringKafkaConsumerConfig {
   }
 
   @Bean
-  public SpringKafkaEventConsumer stratioKafkaEventConsumerAdapter(StratioKafkaEventProducer stratioKafkaEventProducer) {
+  public SpringKafkaEventConsumer stratioKafkaEventConsumerAdapter(
+      StratioKafkaEventProducer stratioKafkaEventProducer) {
     return new SpringKafkaEventConsumer(stratioKafkaEventProducer);
   }
 

@@ -30,18 +30,16 @@ spring:
     password: mysecretpassword
     initialization-mode: always
   kafka:
-    bootstrap-servers: adelpozo.servicebus.windows.net:9093,localhost:9092
-    client-id: first-producer
-    properties:
-      request.timeout.ms: 60000
-      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://adelpozo.servicebus.windows.net/;SharedAccessKeyName=SendAndProduceAccessKey;SharedAccessKey=daXRnk3wt90wYKqNiFiKS5UkPOWXYMGJqbWSmcbS5yM=";
-      sasl.mechanism: PLAIN
-      security.protocol: SASL_SSL
+    bootstrap-servers: localhost:9092 #,adelpozo.servicebus.windows.net:9093
+#    properties:
+#      request.timeout.ms: 60000
+#      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://adelpozo.servicebus.windows.net/;SharedAccessKeyName=SendAndProduceAccessKey;SharedAccessKey=daXRnk3wt90wYKqNiFiKS5UkPOWXYMGJqbWSmcbS5yM=";
+#      sasl.mechanism: PLAIN
+#      security.protocol: SASL_SSL
     producer:
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
+      value-deserializer: org.apache.kafka.common.serialization.StringSerializer
     consumer:
-      group-id: $Default
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   h2:
@@ -56,9 +54,19 @@ stratio:
         transactionIdPrefix: @project.artifactId@
       consumer:
         enabled: true
-        topics: eventhubtopic
         consumerGroupId: @project.artifactId@Group
+        topics: kafkatopic
       producer:
         enabled: true
         actionTopic:
           noaction: evenhubproducer
+      eventhub:
+        enabled: true
+        bootstrapServers: adelpozo.servicebus.windows.net:9093
+        consumerGroupId: @project.artifactId@Group
+        requestTimeoutMs: 60000
+        securityProtocol: SASL_SSL
+        saslMechanism: PLAIN
+        saslJaasConfig: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://adelpozo.servicebus.windows.net/;SharedAccessKeyName=SendAndProduceAccessKey;SharedAccessKey=daXRnk3wt90wYKqNiFiKS5UkPOWXYMGJqbWSmcbS5yM=";
+        topics: eventhubtopic
+        saslCallbackHandler:
