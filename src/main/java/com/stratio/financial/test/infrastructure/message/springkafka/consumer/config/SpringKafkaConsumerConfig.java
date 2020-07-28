@@ -1,5 +1,6 @@
 package com.stratio.financial.test.infrastructure.message.springkafka.consumer.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +21,8 @@ public class SpringKafkaConsumerConfig {
 
   @Bean
   public SpringKafkaEventConsumer stratioKafkaEventConsumerAdapter(
-      StratioKafkaEventProducer stratioKafkaEventProducer) {
-    return new SpringKafkaEventConsumer(stratioKafkaEventProducer);
+      @Qualifier("stratioEventHubEventProducer") StratioKafkaEventProducer stratioEventHubEventProducer) {
+    return new SpringKafkaEventConsumer(stratioEventHubEventProducer);
   }
 
 }

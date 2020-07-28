@@ -30,12 +30,7 @@ spring:
     password: mysecretpassword
     initialization-mode: always
   kafka:
-    bootstrap-servers: localhost:9092 #,adelpozo.servicebus.windows.net:9093
-#    properties:
-#      request.timeout.ms: 60000
-#      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://adelpozo.servicebus.windows.net/;SharedAccessKeyName=SendAndProduceAccessKey;SharedAccessKey=daXRnk3wt90wYKqNiFiKS5UkPOWXYMGJqbWSmcbS5yM=";
-#      sasl.mechanism: PLAIN
-#      security.protocol: SASL_SSL
+    bootstrap-servers: localhost:9092
     producer:
       key-deserializer: org.apache.kafka.common.serialization.StringSerializer
       value-deserializer: org.apache.kafka.common.serialization.StringSerializer
@@ -50,7 +45,7 @@ stratio:
   kafka:
     starter:
       transactional:
-        enabled: false
+        enabled: true
         transactionIdPrefix: @project.artifactId@
       consumer:
         enabled: true
@@ -59,7 +54,9 @@ stratio:
       producer:
         enabled: true
         actionTopic:
-          noaction: evenhubproducer
+          noaction: kafkaproducer
+        replicas: 1
+        partitions: 1
       eventhub:
         enabled: true
         bootstrapServers: adelpozo.servicebus.windows.net:9093
@@ -70,3 +67,5 @@ stratio:
         saslJaasConfig: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://adelpozo.servicebus.windows.net/;SharedAccessKeyName=SendAndProduceAccessKey;SharedAccessKey=daXRnk3wt90wYKqNiFiKS5UkPOWXYMGJqbWSmcbS5yM=";
         topics: eventhubtopic
         saslCallbackHandler:
+        actionTopic:
+          noaction: evenhubproducer
