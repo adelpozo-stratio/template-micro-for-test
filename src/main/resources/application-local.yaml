@@ -63,9 +63,9 @@ stratio:
         consumerGroupId: @project.artifactId@Group
         requestTimeoutMs: 60000
         securityProtocol: SASL_SSL
-        saslMechanism: PLAIN
-        saslJaasConfig: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://adelpozo.servicebus.windows.net/;SharedAccessKeyName=SendAndProduceAccessKey;SharedAccessKey=daXRnk3wt90wYKqNiFiKS5UkPOWXYMGJqbWSmcbS5yM=";
-        topics: eventhubtopic
-        saslCallbackHandler:
+        saslMechanism: OAUTHBEARER
+        saslJaasConfig: org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required;
+        topics: eventhubaad
+        saslCallbackHandler: com.stratio.financial.test.infrastructure.eventhub.CustomAuthenticateCallbackHandler
         actionTopic:
-          noaction: evenhubproducer
+          noaction: eventhubproduceaad

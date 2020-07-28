@@ -60,10 +60,20 @@
   <dependencies>
     <!-- AZURE EVENT HUB -->
     <dependency>
-      <groupId>com.azure</groupId>
-      <artifactId>azure-messaging-eventhubs</artifactId>
-      <version>5.0.1</version>
+      <groupId>com.microsoft.azure</groupId>
+      <artifactId>msal4j</artifactId>
+      <version>1.0.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.nimbusds</groupId>
+      <artifactId>oauth2-oidc-sdk</artifactId>
+      <version>6.5</version>
+    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>net.minidev</groupId>-->
+<!--      <artifactId>json-smart</artifactId>-->
+<!--      <version>2.2.1</version>-->
+<!--    </dependency>-->
     <!-- NEW SPRING VERSION NEEDS! -->
     <dependency>
       <groupId>javax.validation</groupId>
