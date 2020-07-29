@@ -66,6 +66,5 @@ stratio:
         saslMechanism: PLAIN
         saslJaasConfig: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://adelpozo.servicebus.windows.net/;SharedAccessKeyName=SendAndProduceAccessKey;SharedAccessKey=daXRnk3wt90wYKqNiFiKS5UkPOWXYMGJqbWSmcbS5yM=";
         topics: eventhubtopic
-        saslCallbackHandler:
         actionTopic:
           noaction: evenhubproducer
