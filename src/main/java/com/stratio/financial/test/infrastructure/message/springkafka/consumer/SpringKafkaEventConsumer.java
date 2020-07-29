@@ -15,11 +15,11 @@ public class SpringKafkaEventConsumer {
 
   private final StratioKafkaEventProducer stratioKafkaEventProducerAdapter;
 
-  @StratioKafkaConsumer(topic = "eventhubaad")
+  @StratioKafkaConsumer(topic = "aad_to_micro_consumer")
   public void consumeEventHubTopic(SimpleMessage consumerMessage) {
     log.info("Consuming From Event Hub Azure {}", consumerMessage.toString());
-    log.info("Producing to Event Hub Azure {}",  consumerMessage.toString());
     stratioKafkaEventProducerAdapter.send("producerEventHub", consumerMessage.toString(), "noaction");
+    log.info("Event Produced to Event Hub (aad_producer_by_micro) Azure {}",  consumerMessage.toString());
   }
 
   @StratioKafkaConsumer(topic = "kafkatopic")

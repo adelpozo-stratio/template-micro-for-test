@@ -45,7 +45,7 @@ stratio:
   kafka:
     starter:
       transactional:
-        enabled: true
+        enabled: false
         transactionIdPrefix: @project.artifactId@
       consumer:
         enabled: true
@@ -65,7 +65,7 @@ stratio:
         securityProtocol: SASL_SSL
         saslMechanism: OAUTHBEARER
         saslJaasConfig: org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required;
-        topics: eventhubaad
+        topics: aad_to_micro_consumer
         saslCallbackHandler: com.stratio.financial.test.infrastructure.eventhub.CustomAuthenticateCallbackHandler
         actionTopic:
-          noaction: eventhubproduceaad
+          noaction: aad_producer_by_micro
