@@ -20,7 +20,7 @@
     <spring-cloud-contract-maven-plugin.version>2.0.2.RELEASE</spring-cloud-contract-maven-plugin.version>
     <serenity-bdd.version>2.0.50</serenity-bdd.version>
     <serenity-cucumber.version>1.9.31</serenity-cucumber.version>
-    <logback-classic.version>1.0.13</logback-classic.version>
+    <logback-classic.version>1.2.0</logback-classic.version>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>2.18</maven-failsafe-plugin.version>
     <jsonassert.version>1.5.0</jsonassert.version>
