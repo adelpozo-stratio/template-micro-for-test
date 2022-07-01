@@ -25,7 +25,7 @@
     <maven-failsafe-plugin.version>2.18</maven-failsafe-plugin.version>
     <jsonassert.version>1.5.0</jsonassert.version>
     <android-json.version>0.0.20131108.vaadin1</android-json.version>
-    <plexus-utils.version>1.5.4</plexus-utils.version>
+    <plexus-utils.version>3.0.16</plexus-utils.version>
   </properties>
 
   <dependencies>
